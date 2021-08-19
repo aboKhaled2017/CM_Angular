@@ -1,0 +1,40 @@
+<main class="form-signin">
+  <form #loginForm="ngForm" (ngSubmit)="login()">
+    <h1 class="h3 mb-3 fw-normal">sign in</h1>
+    <div class="form-floating">
+      <input
+        type="text"
+        class="form-control"
+        id="MemberId"
+        placeholder="Member Id"
+        required
+        name="MemberId"
+        [(ngModel)]="model.MemberId"
+      />
+      <label for="MemberId">Member Id</label>
+    </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="password"
+        name="password"
+        required
+        [(ngModel)]="model.Password"
+      />
+      <label for="password">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+  </form>
+  <p class="mb-4">
+    <a [routerLink]="['/register']">
+      <i class="fa fa-plus-circle"></i> Register
+    </a>
+  </p>
+  <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+</main>
