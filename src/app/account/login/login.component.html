@@ -5,11 +5,11 @@
       <input
         type="text"
         class="form-control"
-        id="MemberId"
+        id="memberId"
         placeholder="Member Id"
         required
-        name="MemberId"
-        [(ngModel)]="model.MemberId"
+        name="memberId"
+        [(ngModel)]="model.memberId"
       />
       <label for="MemberId">Member Id</label>
     </div>
@@ -21,13 +21,15 @@
         placeholder="password"
         name="password"
         required
-        [(ngModel)]="model.Password"
+        [(ngModel)]="model.password"
       />
       <label for="password">Password</label>
     </div>
 
     <div class="checkbox mb-3">
-      <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+      <label>
+        <input type="checkbox" name="rememberClient"  [(ngModel)]="model.rememberClient" /> Remember me
+      </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
   </form>

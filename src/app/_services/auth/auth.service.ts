@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = environment.baseUrl + 'auth/';
+  baseUrl = environment.baseUrl;
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   // currentUser: User;
@@ -24,16 +24,29 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'login', model).pipe(
-      map((response: any) => {
-        const user = response;
-        if (user) {
-          localStorage.setItem('token', user.token);
-          localStorage.setItem('user', JSON.stringify(user.user));
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
-        }
+    let url_ = (this.baseUrl + 'TokenAuth/Authenticate').replace(/[?&]$/, '');
+    let headers: any = {
+      'Content-Type': 'application/json-patch+json',
+      'abp.tenantid': '1',
+      Accept: 'text/plain',
+    };
+    return this.http
+      .post(url_, model, {
+        headers: headers,
       })
-    );
+      .pipe(
+        map((response: any) => {
+          const result = response;
+          if (result) {
+            localStorage.setItem('token', result.result.accessToken);
+            // localStorage.setItem('userId', JSON.stringify(user.user));
+            this.decodedToken = this.jwtHelper.decodeToken(
+              result.result.accessToken
+            );
+            console.log(this.decodedToken);
+          }
+        })
+      );
   }
 
   register(model: any) {

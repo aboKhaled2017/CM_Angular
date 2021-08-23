@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertifyService } from '../../_services/alertify/alertify.service';
 import { AuthService } from '../../_services/auth/auth.service';
 @Component({
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
+      rememberClient: new FormControl(false)
     });
   }
 
